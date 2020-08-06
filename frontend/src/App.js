@@ -11,7 +11,7 @@ const App = () => {
     <BrowserRouter>
       <CssBaseline />
       <Header />
-      <Container maxWidth="sm">
+      <Container maxWidth='sm'>
         <Switch>
           {routes.map(route => (
             <Route 
