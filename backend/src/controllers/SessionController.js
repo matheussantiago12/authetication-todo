@@ -1,35 +1,62 @@
 const User = require('../models/User');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const authConfig = require('../config/auth');
 
 module.exports = {
-    index () {
+    async register (req, res) {
+        try {
+            const { email, password } = req.body;
 
-    },
-
-    async store (req, res) {
-        const { email } = req.body;
-        const { password } = req.body;
-
-        let user = await User.findOne({ email });
-
-        if (!user) {
-            user = await User.create({
+            if (await User.findOne({ email })) 
+                return res.status(400).json({ error: 'User already exists' });
+            
+            const user = await User.create({
                 email,
                 password, 
             });
+
+            user.password = undefined;
+
+            const token = jwt.sign({
+                id: user.id,
+            }, 
+            authConfig.secret, {
+                // 1 dia
+                expiresIn: 86400,
+            });
+            
+            return res.json({ user, token });
+        } catch (error) {
+            return res.status(400).json({ error: 'Registration failed' });
         }
-
-        return res.json(user);
     },
 
-    show () {
+    async authenticate (req, res) {
+        try {
+            const { email, password } = req.body;
 
-    },
+            const user = await User.findOne({ email });
 
-    update () {
+            if (!user)
+                return res.status(400).json({ error: 'User not found' });
 
-    },
+            if (!await bcrypt.compare(password, user.password))
+                return res.status(400).json({ error: 'Invalid password' });
 
-    destroy () {
+            user.password = undefined;
 
+            const token = jwt.sign({
+                id: user.id,
+            }, 
+            authConfig.secret, {
+                // 1 dia
+                expiresIn: 86400,
+            });
+
+            return res.json({ user, token });
+        } catch (error) {
+            return res.status(400).json({ error: 'Authentication failed' });
+        }
     }
 };
