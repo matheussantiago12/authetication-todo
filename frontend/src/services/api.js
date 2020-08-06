@@ -11,7 +11,7 @@ api.interceptors.request.use(config => {
         config.headers["authorization"] = `Bearer ${state.session.user.user_token}`;
     }
 
-    if (config.method === 'PUT' || config.method === 'POST') {
+    if (config.method === 'DELETE' || config.method === 'POST') {
         config.headers["Content-Type"] = 'application/json; charset=UTF-8';
     }
 

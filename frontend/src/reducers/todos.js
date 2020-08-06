@@ -1,16 +1,12 @@
-const initialState = ['a'];
+const initialState = [{nome:"matheus"}];
 
-const users = (state = initialState, action) => {
+const todos = (state = initialState, action) => {
     switch (action.type) {
-        case 'GET_USERS':
+        case 'GET_TODOS':
             return [
                 ...action.payload,
             ];
-        case 'CLEAR_USERS':
-            return [
-                ...initialState,
-            ];
-        case 'ADD_USER':
+        case 'ADD_TODO':
             return [
                 ...state,
                 action.payload,
@@ -22,4 +18,4 @@ const users = (state = initialState, action) => {
     }
 };
 
-export default users;
+export default todos;

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './App';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core';
-import rootReducer from './reducers';
+import store from './services/store';
 
 const darkTheme = createMuiTheme({
   palette: {
@@ -18,7 +18,7 @@ const darkTheme = createMuiTheme({
 });
 
 ReactDOM.render(
-  <Provider store={rootReducer}>
+  <Provider store={store}>
     <ThemeProvider theme={darkTheme}>
       <App />
     </ThemeProvider>

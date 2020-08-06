@@ -2,7 +2,13 @@ import React from 'react';
 
 const Register = () => {
     return (
-        <h1>page</h1>
+        <>
+            <h1>Eae</h1>
+            <h1>Eae</h1>
+            <h1>Eae</h1>
+            <h1>Eae</h1>
+            <h1>Eae</h1>
+        </>
     );
 };
 
