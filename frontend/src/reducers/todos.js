@@ -1,4 +1,4 @@
-const initialState = [{nome:"matheus"}];
+const initialState = [];
 
 const todos = (state = initialState, action) => {
     switch (action.type) {

@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 
 import { Link, useHistory } from 'react-router-dom';
-import { TextField, Button, Grid, makeStyles } from '@material-ui/core';
-import { useSelector } from 'react-redux';
+import { TextField } from 'formik-material-ui';
+import { Button, Grid, makeStyles } from '@material-ui/core';
+import { useSelector, useDispatch } from 'react-redux';
 import { Formik, Field, Form} from 'formik';
 import * as Yup from 'yup';
 
@@ -27,9 +28,12 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Login = () => {
+    const dispatch = useDispatch();
     const classes = useStyles();
     
     const handleSubmit = (values, { setSubmitting }) => {
+        console.log(values);
+        dispatch({ type: 'LOGIN_REQUEST', payload: values });
     };
 
     const history = useHistory();
@@ -46,7 +50,7 @@ const Login = () => {
             <Formik
                 initialValues={initialValues}
                 validationSchema={validationSchema}
-                onSubmit={handleSubmit}
+                onSubmit={handleSubmit} 
             >
                 {({isSubmitting}) => (
                     <Form>
@@ -70,7 +74,8 @@ const Login = () => {
                             required
                             component={TextField}
                         />
-                        <Button 
+                        <Button
+                            href='' 
                             type='submit'
                             variant='contained'
                             color='secondary'

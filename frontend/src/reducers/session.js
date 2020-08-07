@@ -1,13 +1,18 @@
 const initialState = {
-    isLogged: false,
+    isLoggedIn: false,
     user: {},
 };
 
 const session = (state = initialState, action) => {
     switch (action.type) {
+        case 'LOGIN_REQUEST':
+            return {
+                isLoggedIn: false,
+                user: action.payload,
+            };
         case 'LOGIN':
             return {
-                isLogged: true,
+                isLoggedIn: true,
                 user: action.payload,
             };
         case 'LOGOUT':
