@@ -5,10 +5,6 @@ const TodoSchema = new mongoose.Schema({
         type: String,
         require: true,
     },
-    complete: {
-        type: Boolean,
-        default: false,
-    }
 });
 
 module.exports = mongoose.model('Todo', TodoSchema);
