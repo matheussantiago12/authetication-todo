@@ -12,13 +12,14 @@ const Header = () => {
         dispatch({ type: 'LOGOUT' });
     };
     
-    
+    const isLoggedIn = useSelector(state => state.session.isLoggedIn);
+
     return(
         <Container> 
             <Link to='/login'>
                 <h1>Authentication To-do</h1>
             </Link>
-            <h2 onClick={handleClick}>Sair</h2>
+            {isLoggedIn && <h2 onClick={handleClick}>Sair</h2>}
         </Container>
     );
 };
