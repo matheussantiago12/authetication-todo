@@ -15,18 +15,8 @@ module.exports = {
                 email,
                 password, 
             });
-
-            user.password = undefined;
-
-            const token = jwt.sign({
-                id: user.id,
-            }, 
-            authConfig.secret, {
-                // 1 dia
-                expiresIn: 86400,
-            });
             
-            return res.json({ user, token });
+            return res.json(user);
         } catch (error) {
             return res.status(400).json({ error: 'Registration failed' });
         }
