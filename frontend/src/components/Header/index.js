@@ -1,5 +1,9 @@
 import React, { useEffect } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
+
+import { Container } from './styles';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -8,13 +12,14 @@ const Header = () => {
         dispatch({ type: 'LOGOUT' });
     };
     
-    const user = useSelector(state => state.session.user);
     
     return(
-        <header>
-            <h1>Header {user.email}</h1>
-            <button onClick={handleClick}></button>
-        </header>
+        <Container> 
+            <Link to='/login'>
+                <h1>Authentication To-do</h1>
+            </Link>
+            <h2 onClick={handleClick}>Sair</h2>
+        </Container>
     );
 };
 

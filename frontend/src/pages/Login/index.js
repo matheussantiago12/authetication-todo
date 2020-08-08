@@ -32,8 +32,8 @@ const Login = () => {
     const classes = useStyles();
     
     const handleSubmit = (values, { setSubmitting }) => {
-        console.log(values);
         dispatch({ type: 'LOGIN_REQUEST', payload: values });
+        setSubmitting(false);
     };
 
     const history = useHistory();
